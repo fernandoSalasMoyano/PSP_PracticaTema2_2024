@@ -21,6 +21,7 @@ public class PrincipalBola extends JFrame implements KeyListener
 		setSize(500, 600); // Tamaño de la ventana
 		setLocationRelativeTo(null); // Centrar la ventana en la pantalla
 		setVisible(true); // Hacer visible la ventana
+		setResizable(false);
 	}
 
 	@Override

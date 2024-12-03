@@ -52,10 +52,10 @@ public class Bola
 	}
 	public int dameX()
 	{
-		return (this.x);
+		return (this.x + 25);
 	}
 	public int dameY()
 	{
-		return (this.y);
+		return (this.y + 25);
 	}
 }

@@ -18,7 +18,7 @@ public class PanelBola extends JPanel
     boolean fin = false;
     private Timer temporizador; // Temporizador para controlar el juego
     private long tiempoInicio; // Variable para almacenar el tiempo de inicio
-    private double tiempoTotal;  // Variable para almacenar el tiempo total
+    private long tiempoTotal;  // Variable para almacenar el tiempo total
     private String nombre;
     boolean altaCorrecta;
     private PrincipalBola ventanaPrincipal;
@@ -82,6 +82,14 @@ public class PanelBola extends JPanel
         g.setFont(fuente);
         g.drawString("Salida", 200, 30);
 
+        // Calcular el tiempo transcurrido
+        long tiempoActual = System.currentTimeMillis();
+        long tiempoSegundos = (tiempoActual - tiempoInicio) / 1000;
+
+        // Dibujar el contador de tiempo en la parte superior derecha
+        g.setColor(Color.BLACK);
+        g.drawString("Tiempo: " + tiempoSegundos + " s", 350, 30);
+
         // Dibujar las bolas
         for (Bola b : bola)
         {
@@ -91,6 +99,7 @@ public class PanelBola extends JPanel
         // Dibujar el Bolin
         bolin.pinta(g);
     }
+
 
     // Método para mover el Bolin
     public void mover(int direccion)
@@ -106,14 +115,13 @@ public class PanelBola extends JPanel
             if (!fin) // Solo ejecutar si el juego no ha terminado
             {
                 // Solo mostrar el tiempo si gana
-                tiempoTotal = System.currentTimeMillis() - tiempoInicio;
-                tiempoTotal = tiempoTotal / 1000.0;
+            	tiempoTotal = (System.currentTimeMillis() - tiempoInicio) / 1000; // Redondea automáticamente a un entero
                 datos.conexion();
                 altaCorrecta = datos.altaTiempo(nombre, tiempoTotal);
                 datos.desconectar();
                 if(altaCorrecta)
                 {
-                    JOptionPane.showMessageDialog(this, "Ganaste!!", "Victoria", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Ganaste!! Tiempo: " + tiempoTotal + " s", "Victoria", JOptionPane.INFORMATION_MESSAGE);
                     ventanaPrincipal.setVisible(false);
                     new MenuPrincipal();
                 }

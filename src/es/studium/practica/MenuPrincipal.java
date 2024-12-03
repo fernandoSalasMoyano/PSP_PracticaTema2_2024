@@ -57,7 +57,6 @@ public class MenuPrincipal extends JFrame implements ActionListener
 		else if(evento.getSource().equals(btnRanking))
 		{
 			setVisible(false);
-
 			new Ranking();
 		}
 		else
